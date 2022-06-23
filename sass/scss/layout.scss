@@ -95,6 +95,16 @@ $textshadow: 1px 1px 4px #000;
     grid-template-areas:   'card card card card';
 }
 
+#cart{
+    display: flex;
+    justify-content: center;
+    padding-top: 7rem;
+    margin: 5%;
+    p{
+        font-size: large;
+    }
+}
+
 .welcome{
     font-weight: 600;
     margin: 3rem;
@@ -108,7 +118,7 @@ $textshadow: 1px 1px 4px #000;
 
 .card{
     background-color: $mainColor;
-    .price{
+    .item-price{
         font-size: x-large;
     }
 }
@@ -118,6 +128,9 @@ $textshadow: 1px 1px 4px #000;
     border-color: $black;
     color: #fff;
 }
+
+
+
 
 /*Footer*/
 

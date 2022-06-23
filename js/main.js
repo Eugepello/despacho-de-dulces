@@ -1,3 +1,4 @@
+
 //Array de objetos: PRODUCTOS
 
 const productos = [{
@@ -73,43 +74,59 @@ const productos = [{
 }]
 
 
-//RECIBIMIENTO
-
-const titulo = document.getElementById("titulo");
-
-function recibimiento() {
-  const bienvenida = document.createElement("div");
-  bienvenida.innerHTML = `<h2 class="welcome">¡Bienvenido/a al Despacho de Dulces!</h2>`
-  titulo.appendChild(bienvenida)
-}
-
-recibimiento()
-
-
-//PRODUCTOS
-
-let carrito = [];
+//PRODUCTOS & CARRITO
 
 const mainDiv = document.getElementById("mainDiv")
+
+const divCarrito = document.getElementById("cart")
 
 function stockProductos(){
   productos.forEach((item) => {
     const stock = document.createElement("div")
     stock.setAttribute("class", "stockContainer")
-    stock.innerHTML = `
+    stock.innerHTML += `
     <div class="card h-100">
-    <img src="${item.img}" class="img-fluid">
-    <div class="card-body"
-    <p>${item.categoria}</p>
-    <h3>${item.nombre}</h3>
-    <p class="price">$${item.precio}</p>
-    <button type="button" class="btn btn-primary addCartBtn">Agregar al carrito</button>
-    </div>
+      <img src="${item.img}" class="img-fluid item-img">
+      <div class="card-body"
+        <p>${item.categoria}</p>
+        <h3 class="item-title">${item.nombre}</h3>
+        <p class="item-price">$${item.precio}</p>
+        <button type="button" class="btn btn-primary addCartBtn">Agregar al carrito</button>
+      </div>
     </div>`
-
-    mainDiv.appendChild(stock)
+    
+    mainDiv.append(stock)
   })
+
 };
 
 stockProductos()
+
+const addButton = document.querySelectorAll(".addCartBtn");
+addButton.forEach(addToCart => {
+  addToCart.addEventListener("click", eventoAgregarCarrito)
+})
+
+function eventoAgregarCarrito() {
+  const itemTitle = document.querySelector(".item-title").textContent;
+  const itemImg = document.querySelector(".item-img").src;
+  const itemPrice = document.querySelector(".item-price").textContent;
+  agregarItemCarrito(itemTitle, itemImg, itemPrice)
+}
+
+
+function agregarItemCarrito(itemTitle, itemImg, itemPrice) {
+  const listaCarrito = document.createElement("div")
+  const contenidoCarrito = `
+  <div class="card h-100">
+    <img src="${itemImg}" class="img-fluid item-img">
+    <div class="card-body"
+      <h3 class="item-title">${itemTitle}</h3>
+      <p class="item-price">${itemPrice}</p>
+    </div>
+  </div>`;
+  listaCarrito.innerHTML = contenidoCarrito
+  divCarrito.append(listaCarrito)
+}
+
 

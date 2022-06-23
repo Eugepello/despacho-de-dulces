@@ -109,6 +109,21 @@
       grid-template-areas: 'card card card card';
 }
 
+#cart {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  padding-top: 7rem;
+  margin: 5%;
+}
+
+#cart p {
+  font-size: large;
+}
+
 .welcome {
   font-weight: 600;
   margin: 3rem;
@@ -124,7 +139,7 @@
   background-color: #A2E0B0;
 }
 
-.card .price {
+.card .item-price {
   font-size: x-large;
 }
 
