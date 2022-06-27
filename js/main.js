@@ -1,132 +1,110 @@
 
-//Array de objetos: PRODUCTOS
+// CARRITO & PRODUCTOS
 
-const productos = [{
-  id: 1,
-  nombre: "Oreo",
-  categoria: "Tortas",
-  precio: 2700,
-  descripcion: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores deserunt praesentium quia esse! Corporis, inventore sed cupiditate delectus quibusdam minima ea minus, laudantium quos incidunt molestiae adipisci. Ipsum, incidunt nobis!",
-  img: "./assets/img/oreo.jpg"
-},{
-  id: 2,
-  nombre: "Chocotorta",
-  categoria: "Tortas",
-  precio: 2300,
-  descripcion: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores deserunt praesentium quia esse! Corporis, inventore sed cupiditate delectus quibusdam minima ea minus, laudantium quos incidunt molestiae adipisci. Ipsum, incidunt nobis!",
-  img: "./assets/img/chocotorta.jpg"
-},{
-  id: 3,
-  nombre: "Tiramisú",
-  categoria: "Tortas",
-  precio: 2200,
-  descripcion: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores deserunt praesentium quia esse! Corporis, inventore sed cupiditate delectus quibusdam minima ea minus, laudantium quos incidunt molestiae adipisci. Ipsum, incidunt nobis!",
-  img: "./assets/img/tiramisu.jpg"
-},{
-  id: 4,
-  nombre: "Lemon Pie",
-  categoria: "Tortas",
-  precio: 2800,
-  descripcion: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores deserunt praesentium quia esse! Corporis, inventore sed cupiditate delectus quibusdam minima ea minus, laudantium quos incidunt molestiae adipisci. Ipsum, incidunt nobis!",
-  img: "./assets/img/lemonpie.jpg"
-},{
-  id: 5,
-  nombre: "Marquise",
-  categoria: "Tortas",
-  precio: 3000,
-  descripcion: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores deserunt praesentium quia esse! Corporis, inventore sed cupiditate delectus quibusdam minima ea minus, laudantium quos incidunt molestiae adipisci. Ipsum, incidunt nobis!",
-  img: "./assets/img/marquise.jpg"
-},{
-  id: 6,
-  nombre: "Raspberry Cheesecake",
-  categoria: "Tortas",
-  precio: 3200,
-  descripcion: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores deserunt praesentium quia esse! Corporis, inventore sed cupiditate delectus quibusdam minima ea minus, laudantium quos incidunt molestiae adipisci. Ipsum, incidunt nobis!",
-  img: "./assets/img/raspberry.jpg"
-},{
-  id: 7,
-  nombre: "Vainilla",
-  categoria: "Muffins",
-  precio: 500,
-  descripcion: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores deserunt praesentium quia esse! Corporis, inventore sed cupiditate delectus quibusdam minima ea minus, laudantium quos incidunt molestiae adipisci. Ipsum, incidunt nobis!",
-  img: "./assets/img/vainilla.jpg"
-},{
-  id: 8,
-  nombre: "Chocolate intenso",
-  categoria: "Muffins",
-  precio: 700,
-  descripcion: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores deserunt praesentium quia esse! Corporis, inventore sed cupiditate delectus quibusdam minima ea minus, laudantium quos incidunt molestiae adipisci. Ipsum, incidunt nobis!",
-  img: "./assets/img/chocolateintenso.jpg"
-},{
-  id: 9,
-  nombre: "Marmolado",
-  categoria: "Muffins",
-  precio: 600,
-  descripcion: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores deserunt praesentium quia esse! Corporis, inventore sed cupiditate delectus quibusdam minima ea minus, laudantium quos incidunt molestiae adipisci. Ipsum, incidunt nobis!",
-  img: "./assets/img/marmolado.jpg"
-},{
-  id: 10,
-  nombre: "Orange Glaze",
-  categoria: "Muffins",
-  precio: 750,
-  descripcion: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores deserunt praesentium quia esse! Corporis, inventore sed cupiditate delectus quibusdam minima ea minus, laudantium quos incidunt molestiae adipisci. Ipsum, incidunt nobis!",
-  img: "./assets/img/orangeglaze.jpg"
-}]
+let cart
 
+const stock = document.getElementById("stockContainer");
 
-//PRODUCTOS & CARRITO
+const carritoDiv = document.getElementById("cart")
 
-const mainDiv = document.getElementById("mainDiv")
+const addCart = document.getElementsByClassName("addCartBtn")
 
-const divCarrito = document.getElementById("cart")
+if (JSON.parse(localStorage.getItem("cart"))) {
+  cart = JSON.parse(localStorage.getItem("cart"))
+} else{
+  localStorage.setItem("cart", JSON.stringify([]))
+  cart = JSON.parse(localStorage.getItem("cart"))
+}
 
 function stockProductos(){
   productos.forEach((item) => {
-    const stock = document.createElement("div")
-    stock.setAttribute("class", "stockContainer")
     stock.innerHTML += `
-    <div class="card h-100">
-      <img src="${item.img}" class="img-fluid item-img">
+    <div class="card">
+      <img src="${item.img}" class="img-fluid">
       <div class="card-body"
         <p>${item.categoria}</p>
-        <h3 class="item-title">${item.nombre}</h3>
-        <p class="item-price">$${item.precio}</p>
-        <button type="button" class="btn btn-primary addCartBtn">Agregar al carrito</button>
+        <h3">${item.nombre}</h3>
+        <p>$${item.precio}</p>
+        <button class="btn btn-dark addCartBtn" id="${item.id}">Agregar al carrito</button>
       </div>
     </div>`
-    
-    mainDiv.append(stock)
-  })
-
-};
+  });
+}
 
 stockProductos()
 
-const addButton = document.querySelectorAll(".addCartBtn");
-addButton.forEach(addToCart => {
-  addToCart.addEventListener("click", eventoAgregarCarrito)
-})
 
-function eventoAgregarCarrito() {
-  const itemTitle = document.querySelector(".item-title").textContent;
-  const itemImg = document.querySelector(".item-img").src;
-  const itemPrice = document.querySelector(".item-price").textContent;
-  agregarItemCarrito(itemTitle, itemImg, itemPrice)
+for (let i = 0; i < addCart.length; i++) {
+  const add = addCart[i]
+  add.addEventListener("click", agregarAlCarrito)
 }
 
 
-function agregarItemCarrito(itemTitle, itemImg, itemPrice) {
-  const listaCarrito = document.createElement("div")
-  const contenidoCarrito = `
-  <div class="card h-100">
-    <img src="${itemImg}" class="img-fluid item-img">
-    <div class="card-body"
-      <h3 class="item-title">${itemTitle}</h3>
-      <p class="item-price">${itemPrice}</p>
-    </div>
-  </div>`;
-  listaCarrito.innerHTML = contenidoCarrito
-  divCarrito.append(listaCarrito)
+function agregarAlCarrito(e) {
+  const boton = e.target;
+  const idBoton = boton.getAttribute("id")
+  const findProduct = productos.find(product => product.id == idBoton)
+  const inCart = cart.find(product => product.id == findProduct.id)
+  if (!inCart) {
+    cart.push({...findProduct, cantidad: 1})
+  } else {
+    let filtrar = cart.filter(product => product.id != inCart.id)
+    cart = [...filtrar, {...inCart, cantidad: inCart.cantidad + 1}]
+  }
+  console.log(cart);
+  localStorage.setItem("cart", JSON.stringify(cart))
 }
 
 
+const total = () => {
+  return cart.reduce((acc, product) => acc + product.precio * product.cantidad, 0)
+}
+
+if (cart.length == 0) {
+  const empty = `<h2 class="cartText">El carrito está vacío</h2>`
+  carritoDiv.innerHTML += empty
+} else {
+  const grilla = `
+  <div class="grillaContainer">
+		<table>
+			<thead>
+				<tr>
+          <th></th>
+          <th class="textGrilla">PRODUCTOS</th>
+          <th class="textGrilla">CANTIDAD</th>
+          <th class="textGrilla">PRECIO</th>
+        </tr>
+			</thead>
+			<tbody id="bodyGrilla">
+			</tbody>
+			<tfoot>
+				<tr>
+				  <th></th>
+	        <th></th>
+				  <th class="txtTotal">Total:</th>
+				  <th id="total">$${total()}</th>
+				</tr>
+			</tfoot>
+		</table>
+	</div>
+	<div class="btn-container">
+		<button class="btn btn-dark">FINALIZAR COMPRA</button>
+	</div>`
+
+  carritoDiv.innerHTML += grilla
+  const bodyGrilla = document.getElementById("bodyGrilla");
+
+  for (let i = 0; i < cart.length; i++) {
+    const element = cart[i];
+    const {id, nombre, img, precio, cantidad} = element;
+    const carrito = `
+    <tr id=${id}>
+			<th><img class="img-fluid" src=${img}></th>
+			<th><span>${nombre}</span></th>
+			<th>${cantidad}</th>
+			<th>$${(cantidad * precio)}</th>
+		</tr>`
+
+    bodyGrilla.innerHTML += carrito
+  }
+}
