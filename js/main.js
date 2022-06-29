@@ -34,6 +34,7 @@ function stockProductos(){
 stockProductos()
 
 
+
 for (let i = 0; i < addCart.length; i++) {
   const add = addCart[i]
   add.addEventListener("click", agregarAlCarrito)
@@ -53,6 +54,7 @@ function agregarAlCarrito(e) {
   }
   console.log(cart);
   localStorage.setItem("cart", JSON.stringify(cart))
+  location.reload()
 }
 
 
@@ -61,7 +63,7 @@ const total = () => {
 }
 
 if (cart.length == 0) {
-  const empty = `<h2 class="cartText">El carrito está vacío</h2>`
+  const empty = `<h5 class="cartText">El carrito está vacío</h5>`
   carritoDiv.innerHTML += empty
 } else {
   const grilla = `
@@ -82,14 +84,12 @@ if (cart.length == 0) {
 				  <th></th>
 	        <th></th>
 				  <th class="txtTotal">Total:</th>
-				  <th id="total">$${total()}</th>
+				  <th id="total">$${total().toLocaleString()}</th>
 				</tr>
 			</tfoot>
 		</table>
 	</div>
-	<div class="btn-container">
-		<button class="btn btn-dark">FINALIZAR COMPRA</button>
-	</div>`
+  `
 
   carritoDiv.innerHTML += grilla
   const bodyGrilla = document.getElementById("bodyGrilla");
@@ -108,3 +108,36 @@ if (cart.length == 0) {
     bodyGrilla.innerHTML += carrito
   }
 }
+
+const vaciarCarrito = document.getElementById("vaciarCarrito")
+
+vaciarCarrito.onclick = (e) => {
+  e.preventDefault()
+  localStorage.clear()
+  location.reload()
+}
+
+function finalizarCompraFunc() {
+  class Cliente {
+    constructor(nombre, email, direccion){
+      this.nombre = nombre,
+      this.email = email,
+      this.direccion = direccion
+    }
+  }
+  let nombre = document.getElementById("nombre")
+  let email = document.getElementById("email")
+  let telefono = document.getElementById("telefono")
+  let direccion = document.getElementById("direccion")
+  let compraCliente = new Cliente(nombre.value, email.value, telefono.value, direccion.value)
+  console.log(compraCliente);
+  console.log(cart);
+}
+
+let finalizarCompra = document.getElementById("finalizarCompra");
+
+finalizarCompra.onclick = (e) => {
+  e.preventDefault()
+  finalizarCompraFunc()
+}
+

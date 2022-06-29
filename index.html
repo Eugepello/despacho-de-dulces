@@ -17,7 +17,7 @@
 
   <!--Logo y Barra nav-->
 
-    <nav class="navbar1 navbar navbar-expand-lg navbar-light bg">
+    <nav class="container-fluid navbar1 navbar navbar-expand-lg navbar-light bg">
       <div class="container-fluid">
         <img src="./assets/img/muffin.png" alt="Logo" class="logo">
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -63,20 +63,32 @@
 
   <div id="fondoCarrito">
     <span id="contadorCarrito"></span>
-    <h4>Carrito</h4>
+    <h3>Carrito</h3>
     <div id="cart" class="container">
       <p id="subtotal"></p>
       <div id="cantidadTotal">
+        
 
       </div>
-      <!-- <div>
-        <button id="vaciarCarrito" class="btn btn-dark">Vaciar carrito</button>
-        <button id="terminarCompra" class="btn btn-success">Terminar compra</button>
-      </div> -->
     </div>
+    <div class="vaciarCarritoContainer"><button type="button" id="vaciarCarrito" class="btn btn-dark">VACIAR CARRITO</button></div>
   </div>
-
-
+  
+  <div id="form" class="container col-md-6">
+    <h3>Completá los siguientes datos para finalizar la compra:</h3>
+    <form method="post" class="formulario">
+      <label for="nombre" class="form-label">Nombre completo: </label>
+      <input type="text" class="form-control" name="nombre" id="nombre" placeholder="Ingresá tu nombre..." required>
+      <label for="email" class="form-label">E-mail: </label>
+      <input type="email" class="form-control" name="email" id="email" placeholder="Ingresá tu email..." required>
+      <label for="telefono" class="form-label">Teléfono: </label>
+      <input type="text" class="form-control" name="telefono" id="telefono" placeholder="Ingresá tu teléfono...">
+      <label for="adress">Dirección: </label>
+      <input type="text" class="form-control" name="adress" id="direccion" placeholder="Ingresá tu dirección...">
+  </div>
+  <div class="btn-container">
+		<button class="btn btn-dark" id="finalizarCompra">FINALIZAR COMPRA</button>
+	</div>
 
 </main>
 

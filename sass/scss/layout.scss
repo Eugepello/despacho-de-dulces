@@ -102,7 +102,7 @@ $textshadow: 0 0.4px 0.5px $black;
   padding: 4rem;
   margin-top: 100px;
   background-color: pink;
-  h4{
+  h3{
     text-align: center;
     margin-bottom: 50px;
     color: $black;
@@ -110,11 +110,16 @@ $textshadow: 0 0.4px 0.5px $black;
     text-transform: uppercase;
     font-weight: 600;
   }
-  #cart{
-    display: flex;
-    justify-content: space-between;
-    gap: 2rem;
-  }
+}
+
+.cartText{
+  text-align: center;
+}
+
+.vaciarCarritoContainer{
+  display: flex;
+  justify-content: center;
+  padding-top: 30px;
 }
 
 .card{
@@ -194,7 +199,22 @@ th{
   font-size: 20px;
 }
 
+#form{
+  padding-top: 2%;
+  h3{
+    margin-bottom: 30px;
+  }
+  .formulario{
+    display: grid;
+    gap: 10px;
+  }
+}
 
+.btn-container{
+  display: flex;
+  justify-content: center;
+  padding-top: 30px;
+}
 
 
 /*Footer*/
@@ -259,22 +279,29 @@ th{
     border-radius:100%;
 }
 
-@media (max-width:991px){
-.site-footer [class^=col-]{
-    margin-bottom:30px
-}
-}
 
 
-@media (max-width:767px){
+@media screen and (min-width: 767px) and (max-width:1199px){
+  .site-footer [class^=col-]{
+      margin-bottom:30px
+  }
+
+  #stockContainer{
+    display: grid;
+    justify-content: space-between;
+    grid-template-areas:   'card card card';
+  }
+}
+
+@media (max-width:950px){
 .site-footer{
     padding-bottom:0
 }
 
-#mainDiv{
-    display: grid;
-    justify-content: space-between;
-    grid-template-areas:   'card card';
+#stockContainer{
+  display: grid;
+  justify-content: space-between;
+  grid-template-areas:   'card card';
 }
 
 .site-footer .copyright-text,.site-footer .social-icons{
@@ -329,10 +356,10 @@ th{
     font-size:14px
 }
 
-@media (max-width:767px){
+
 .social-icons li.title{
-    display:block;
-    margin-right:0;
-    font-weight:600
-    }
+  display:block;
+  margin-right:0;
+  font-weight:600
 }
+
