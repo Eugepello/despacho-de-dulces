@@ -1,20 +1,19 @@
 
 // CARRITO & PRODUCTOS
 
-let cart
+let cart;
 
 const stock = document.getElementById("stockContainer");
 
-const carritoDiv = document.getElementById("cart")
+const carritoDiv = document.getElementById("cart");
 
-const addCart = document.getElementsByClassName("addCartBtn")
+const addCart = document.getElementsByClassName("addCartBtn");
 
-if (JSON.parse(localStorage.getItem("cart"))) {
-  cart = JSON.parse(localStorage.getItem("cart"))
-} else{
-  localStorage.setItem("cart", JSON.stringify([]))
-  cart = JSON.parse(localStorage.getItem("cart"))
-}
+const vaciarCarrito = document.getElementById("vaciarCarrito");
+
+
+cart = JSON.parse(localStorage.getItem("cart")) || [];
+
 
 function stockProductos(){
   productos.forEach((item) => {
@@ -33,13 +32,10 @@ function stockProductos(){
 
 stockProductos()
 
-
-
 for (let i = 0; i < addCart.length; i++) {
   const add = addCart[i]
   add.addEventListener("click", agregarAlCarrito)
 }
-
 
 function agregarAlCarrito(e) {
   const boton = e.target;
@@ -52,70 +48,73 @@ function agregarAlCarrito(e) {
     let filtrar = cart.filter(product => product.id != inCart.id)
     cart = [...filtrar, {...inCart, cantidad: inCart.cantidad + 1}]
   }
-  console.log(cart);
   localStorage.setItem("cart", JSON.stringify(cart))
-  location.reload()
+  showCart()
 }
-
 
 const total = () => {
   return cart.reduce((acc, product) => acc + product.precio * product.cantidad, 0)
 }
 
-if (cart.length == 0) {
-  const empty = `<h5 class="cartText">El carrito está vacío</h5>`
-  carritoDiv.innerHTML += empty
-} else {
-  const grilla = `
-  <div class="grillaContainer">
-		<table>
-			<thead>
-				<tr>
-          <th></th>
-          <th class="textGrilla">PRODUCTOS</th>
-          <th class="textGrilla">CANTIDAD</th>
-          <th class="textGrilla">PRECIO</th>
-        </tr>
-			</thead>
-			<tbody id="bodyGrilla">
-			</tbody>
-			<tfoot>
-				<tr>
-				  <th></th>
-	        <th></th>
-				  <th class="txtTotal">Total:</th>
-				  <th id="total">$${total().toLocaleString()}</th>
-				</tr>
-			</tfoot>
-		</table>
-	</div>
-  `
 
-  carritoDiv.innerHTML += grilla
-  const bodyGrilla = document.getElementById("bodyGrilla");
+function showCart() {
+  if (cart.length == 0) {
+    const empty = `<h5 class="cartText">El carrito está vacío</h5>`
+    carritoDiv.innerHTML += empty
+  } else {
+    const grilla = `
+    <div class="grillaContainer">
+      <table>
+        <thead>
+          <tr>
+            <th></th>
+            <th class="textGrilla">PRODUCTOS</th>
+            <th class="textGrilla">CANTIDAD</th>
+            <th class="textGrilla">PRECIO</th>
+          </tr>
+        </thead>
+        <tbody id="bodyGrilla">
+        </tbody>
+        <tfoot>
+          <tr>
+            <th></th>
+            <th></th>
+            <th class="txtTotal">Total:</th>
+            <th id="total">$${total().toLocaleString()}</th>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+    `
 
-  for (let i = 0; i < cart.length; i++) {
-    const element = cart[i];
-    const {id, nombre, img, precio, cantidad} = element;
-    const carrito = `
-    <tr id=${id}>
-			<th><img class="img-fluid" src=${img}></th>
-			<th><span>${nombre}</span></th>
-			<th>${cantidad}</th>
-			<th>$${(cantidad * precio)}</th>
-		</tr>`
+    carritoDiv.innerHTML = grilla
+    const bodyGrilla = document.getElementById("bodyGrilla");
 
-    bodyGrilla.innerHTML += carrito
+    for (let i = 0; i < cart.length; i++) {
+      const element = cart[i];
+      const {id, nombre, img, precio, cantidad} = element;
+      const carrito = `
+      <tr id=${id}>
+        <th><img class="img-fluid" src=${img}></th>
+        <th><span>${nombre}</span></th>
+        <th>${cantidad}</th>
+        <th>$${(cantidad * precio)}</th>
+      </tr>`
+      bodyGrilla.innerHTML += carrito
+    }
   }
 }
 
-const vaciarCarrito = document.getElementById("vaciarCarrito")
+showCart()
 
 vaciarCarrito.onclick = (e) => {
   e.preventDefault()
+  cart = []
   localStorage.clear()
-  location.reload()
+  const empty = `<h5 class="cartText">El carrito está vacío</h5>`
+  carritoDiv.innerHTML = empty
 }
+
 
 function finalizarCompraFunc() {
   class Cliente {
