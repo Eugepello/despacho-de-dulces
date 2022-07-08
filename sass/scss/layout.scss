@@ -1,3 +1,9 @@
+*{
+  padding: 0;
+  margin: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
 
 $mainColor: #A2E0B0;
 $secondaryColor: #B9C2F7;
@@ -57,10 +63,6 @@ $textshadow: 0 0.4px 0.5px $black;
         }
 }
 
-.navbar-toggler-icon{
-    background-color: #fff;
-}
-
 .logo-redes{
     color: $black;
 }
@@ -102,17 +104,15 @@ $textshadow: 0 0.4px 0.5px $black;
   padding: 4rem;
   margin-top: 100px;
   background-color: pink;
-  h3{
-    text-align: center;
-    margin-bottom: 50px;
-    color: $black;
-    text-decoration: underline 1.5px;
-    text-transform: uppercase;
-    font-weight: 600;
+  display: grid;
+  justify-content: center;
+  i{
+    font-size: 40px;
+    padding: 0 0 50px 1.6em;
   }
 }
 
-  .cartText{
+.cartText{
   text-align: center;
 }
 

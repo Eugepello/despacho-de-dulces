@@ -1,8 +1,6 @@
 
 // CARRITO & PRODUCTOS
 
-let cart;
-
 const stock = document.getElementById("stockContainer");
 
 const carritoDiv = document.getElementById("cart");
@@ -11,9 +9,9 @@ const addCart = document.getElementsByClassName("addCartBtn");
 
 const vaciarCarrito = document.getElementById("vaciarCarrito");
 
+let cart;
 
 cart = JSON.parse(localStorage.getItem("cart")) || [];
-
 
 function stockProductos(){
   productos.forEach((item) => {
@@ -22,20 +20,20 @@ function stockProductos(){
       <img src="${item.img}" class="img-fluid">
       <div class="card-body"
         <p>${item.categoria}</p>
-        <h3">${item.nombre}</h3>
+        <h3>${item.nombre}</h3>
         <p>$${item.precio}</p>
         <button class="btn btn-dark addCartBtn" id="${item.id}">Agregar al carrito</button>
       </div>
     </div>`
   });
-}
+};
 
-stockProductos()
+stockProductos();
 
 for (let i = 0; i < addCart.length; i++) {
   const add = addCart[i]
   add.addEventListener("click", agregarAlCarrito)
-}
+};
 
 function agregarAlCarrito(e) {
   const boton = e.target;
@@ -50,12 +48,24 @@ function agregarAlCarrito(e) {
   }
   localStorage.setItem("cart", JSON.stringify(cart))
   showCart()
-}
+  addedToast()
+};
 
 const total = () => {
   return cart.reduce((acc, product) => acc + product.precio * product.cantidad, 0)
-}
+};
 
+function addedToast() {
+  cart.forEach((item) => {
+    Toastify({
+      text: "Agregaste " + item.nombre + " al carrito",
+      duration: 2000,
+      close: true,
+      position: "center",
+      backgroundColor: "#000",
+    }).showToast();
+  })
+};
 
 function showCart() {
   if (cart.length == 0) {
@@ -103,18 +113,33 @@ function showCart() {
       bodyGrilla.innerHTML += carrito
     }
   }
-}
+};
 
-showCart()
+showCart();
 
 vaciarCarrito.onclick = (e) => {
-  e.preventDefault()
-  cart = []
-  localStorage.clear()
-  const empty = `<h5 class="cartText">El carrito está vacío</h5>`
-  carritoDiv.innerHTML = empty
-}
-
+  Swal.fire({
+    title: "¿Estás seguro/a?",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#5BD99D",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Sí, vaciar",
+  }).then((result) => {
+    if (result.isConfirmed) {
+      e.preventDefault()
+      cart = []
+      localStorage.clear()
+      const empty = `<h5 class="cartText">El carrito está vacío</h5>`
+      carritoDiv.innerHTML = empty
+      Swal.fire(
+        "Borrado",
+        "Tu carrito fue vaciado",
+        "success"
+      )
+    }
+  })
+};
 
 function finalizarCompraFunc() {
   class Cliente {
@@ -131,12 +156,12 @@ function finalizarCompraFunc() {
   let compraCliente = new Cliente(nombre.value, email.value, telefono.value, direccion.value)
   console.log(compraCliente);
   console.log(cart);
-}
+};
 
 let finalizarCompra = document.getElementById("finalizarCompra");
 
 finalizarCompra.onclick = (e) => {
   e.preventDefault()
   finalizarCompraFunc()
-}
+};
 
