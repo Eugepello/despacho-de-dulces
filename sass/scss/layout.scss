@@ -14,53 +14,53 @@ $textshadow: 0 0.4px 0.5px $black;
 /*NAV*/
 
 .navbar1{
-    background-color: $mainColor;
-    box-shadow: $shadow;
-        .logo {
-            width: 150px;
-            height: 150px;
-            grid-column: 2/3;
-            padding: 10px;
-            margin-left: 50px;
-            cursor: pointer;
-        }
-        .menu {
-            justify-content: space-between;
-            .nav-item{
-                padding: 0 1vw;
-            }
-            .navbar-nav{
-                font-size: large;
-                font-weight: 300;
-                margin-left: 13vw;
-            }
-            li{
-                .nav-link{
-                    color: #000;
-                }
-                border-radius: 3px;
-                text-decoration: none;
-                align-content: center;
-                list-style: none;
-                cursor: pointer;
-                transition: all 0.5s;
-                transition-property: width background-color;
-                a{
-                    display: block;
-                    text-decoration: none;
-                    color: $black;
-                    font-weight: 600;
-                    cursor: pointer;
-                    text-transform: uppercase;
-                    padding: 12px 15px;
-                }
-            }
-            li:hover{
-                transform: scale(1.1, 1.1);
-                background-color: #fff;
-                color: $black;
-            }
-        }
+  background-color: $mainColor;
+  box-shadow: $shadow;
+  .logo {
+    width: 150px;
+    height: 150px;
+    grid-column: 2/3;
+    padding: 10px;
+    margin-left: 50px;
+    cursor: pointer;
+  }
+  .menu {
+    justify-content: space-between;
+    .nav-item{
+      padding: 0 1vw;
+    }
+    .navbar-nav{
+      font-size: large;
+      font-weight: 300;
+      margin-left: 13vw;
+    }
+    li{
+      .nav-link{
+        color: #000;
+      }
+      border-radius: 3px;
+      text-decoration: none;
+      align-content: center;
+      list-style: none;
+      cursor: pointer;
+      transition: all 0.5s;
+      transition-property: width background-color;
+      a{
+        display: block;
+        text-decoration: none;
+        color: $black;
+        font-weight: 600;
+        cursor: pointer;
+        text-transform: uppercase;
+        padding: 12px 15px;
+      }
+    }
+    li:hover{
+      transform: scale(1.1, 1.1);
+      background-color: #fff;
+      color: $black;
+    }
+  }
 }
 
 .logo-redes{
