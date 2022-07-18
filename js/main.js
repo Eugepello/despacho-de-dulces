@@ -2,7 +2,7 @@ const localFetch = async () => {
   try {
     const response = await fetch("./productos.json");
 
-    const getItems = await response.json();
+    const productos = await response.json();
 
     const stock = document.getElementById("stockContainer");
 
@@ -11,8 +11,6 @@ const localFetch = async () => {
     const addCart = document.getElementsByClassName("addCartBtn");
 
     const vaciarCarrito = document.getElementById("vaciarCarrito");
-
-    productos = getItems
 
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
@@ -24,28 +22,29 @@ const localFetch = async () => {
           <div class="card-body"
             <p>${item.categoria}</p>
             <h3>${item.nombre}</h3>
-            <p>$${item.precio}</p>
+            <p>$${item.precio.toLocaleString()}</p>
             <button class="btn btn-dark addCartBtn" id="${item.id}">Agregar al carrito</button>
           </div>
-        </div>`
+        </div>
+        `
       })
     };
 
     function eventAdd() {
       for (let i = 0; i < addCart.length; i++) {
       const add = addCart[i]
-      add.addEventListener("click", agregarAlCarrito, addedToast)
+      add.addEventListener("click", agregarAlCarrito, addedProductToast)
       }
     }
 
-    function addedToast() {
+    function addedProductToast() {
       Toastify({
-          text: "Agregaste un producto al carrito",
-          duration: 2000,
-          close: true,
-          position: "center",
-          backgroundColor: "#000",
-        }).showToast();
+        text: "Agregaste un producto al carrito",
+        duration: 2000,
+        close: true,
+        position: "center",
+        backgroundColor: "#000",
+      }).showToast();
     };
 
     function agregarAlCarrito(e) {
@@ -61,7 +60,7 @@ const localFetch = async () => {
       }
       localStorage.setItem("cart", JSON.stringify(cart))
       showCart()
-      addedToast()
+      addedProductToast()
     };
 
     const total = () => {
@@ -109,8 +108,9 @@ const localFetch = async () => {
             <th><img class="img-fluid" src=${img}></th>
             <th><span>${nombre}</span></th>
             <th>${cantidad}</th>
-            <th>$${(cantidad * precio)}</th>
-          </tr>`
+            <th>$${(cantidad * precio).toLocaleString()}</th>
+          </tr>
+          `
           bodyGrilla.innerHTML += carrito
         }
       }
@@ -129,7 +129,9 @@ const localFetch = async () => {
           e.preventDefault()
           cart = []
           localStorage.clear()
-          const empty = `<h5 class="cartText">El carrito está vacío</h5>`
+          const empty = `
+          <h5 class="cartText">El carrito está vacío</h5>
+          `
           carritoDiv.innerHTML = empty
           Swal.fire(
             "Borrado",
@@ -142,9 +144,10 @@ const localFetch = async () => {
 
     function finalizarCompraFunc() {
       class Cliente {
-        constructor(nombre, email, direccion){
+        constructor(nombre, email, telefono, direccion){
           this.nombre = nombre,
           this.email = email,
+          this.telefono = telefono,
           this.direccion = direccion
         }
       }
@@ -153,8 +156,7 @@ const localFetch = async () => {
       let telefono = document.getElementById("telefono")
       let direccion = document.getElementById("direccion")
       let compraCliente = new Cliente(nombre.value, email.value, telefono.value, direccion.value)
-      console.log(compraCliente);
-      console.log(cart);
+      Swal.fire("¡Gracias por tu compra, " + nombre.value + "! " + "Estos son tus datos: " + Object.values(compraCliente))
     };
 
     let finalizarCompra = document.getElementById("finalizarCompra");
@@ -166,9 +168,9 @@ const localFetch = async () => {
 
     stockProductos();
 
-    showCart();
-
     eventAdd();
+
+    showCart();
 
   } catch (error){
     console.error(error);
