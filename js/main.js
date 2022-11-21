@@ -1,20 +1,20 @@
 const localFetch = async () => {
   try {
-    const response = await fetch("./productos.json");
+    const response = await fetch('./productos.json');
 
     const productos = await response.json();
 
-    const stock = document.getElementById("stockContainer");
+    const stock = document.getElementById('stockContainer');
 
-    const carritoDiv = document.getElementById("cart");
+    const carritoDiv = document.getElementById('cart');
 
-    const addCart = document.getElementsByClassName("addCartBtn");
+    const addCart = document.getElementsByClassName('addCartBtn');
 
-    const vaciarCarrito = document.getElementById("vaciarCarrito");
+    const vaciarCarrito = document.getElementById('vaciarCarrito');
 
-    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
-    function stockProductos(){
+    function stockProductos() {
       productos.forEach((item) => {
         stock.innerHTML += `
         <div class="card">
@@ -26,51 +26,51 @@ const localFetch = async () => {
             <button class="btn btn-dark addCartBtn" id="${item.id}">Agregar al carrito</button>
           </div>
         </div>
-        `
-      })
-    };
+        `;
+      });
+    }
 
     function eventAdd() {
       for (let i = 0; i < addCart.length; i++) {
-      const add = addCart[i]
-      add.addEventListener("click", agregarAlCarrito, addedProductToast)
+        const add = addCart[i];
+        add.addEventListener('click', agregarAlCarrito, addedProductToast);
       }
     }
 
     function addedProductToast() {
       Toastify({
-        text: "Agregaste un producto al carrito",
+        text: 'Agregaste un producto al carrito',
         duration: 2000,
         close: true,
-        position: "center",
-        backgroundColor: "#000",
+        position: 'center',
+        backgroundColor: '#000',
       }).showToast();
-    };
+    }
 
     function agregarAlCarrito(e) {
       const boton = e.target;
-      const idBoton = boton.getAttribute("id")
-      const findProduct = productos.find(product => product.id == idBoton)
-      const inCart = cart.find(product => product.id == findProduct.id)
+      const idBoton = boton.getAttribute('id');
+      const findProduct = productos.find((product) => product.id == idBoton);
+      const inCart = cart.find((product) => product.id == findProduct.id);
       if (!inCart) {
-        cart.push({...findProduct, cantidad: 1})
+        cart.push({ ...findProduct, cantidad: 1 });
       } else {
-        let filtrar = cart.filter(product => product.id != inCart.id)
-        cart = [...filtrar, {...inCart, cantidad: inCart.cantidad + 1}]
+        let filtrar = cart.filter((product) => product.id != inCart.id);
+        cart = [...filtrar, { ...inCart, cantidad: inCart.cantidad + 1 }];
       }
-      localStorage.setItem("cart", JSON.stringify(cart))
-      showCart()
-      addedProductToast()
-    };
+      localStorage.setItem('cart', JSON.stringify(cart));
+      showCart();
+      addedProductToast();
+    }
 
     const total = () => {
-      return cart.reduce((acc, product) => acc + product.precio * product.cantidad, 0)
+      return cart.reduce((acc, product) => acc + product.precio * product.cantidad, 0);
     };
 
     function showCart() {
       if (cart.length == 0) {
-        const empty = `<h5 class="cartText">El carrito está vacío</h5>`
-        carritoDiv.innerHTML += empty
+        const empty = `<h5 class="cartText">El carrito está vacío</h5>`;
+        carritoDiv.innerHTML += empty;
       } else {
         const grilla = `
         <div class="grillaContainer">
@@ -95,14 +95,14 @@ const localFetch = async () => {
             </tfoot>
           </table>
         </div>
-        `
+        `;
 
-        carritoDiv.innerHTML = grilla
-        const bodyGrilla = document.getElementById("bodyGrilla");
+        carritoDiv.innerHTML = grilla;
+        const bodyGrilla = document.getElementById('bodyGrilla');
 
         for (let i = 0; i < cart.length; i++) {
           const element = cart[i];
-          const {id, nombre, img, precio, cantidad} = element;
+          const { id, nombre, img, precio, cantidad } = element;
           const carrito = `
           <tr id=${id}>
             <th><img class="img-fluid" src=${img}></th>
@@ -110,60 +110,62 @@ const localFetch = async () => {
             <th>${cantidad}</th>
             <th>$${(cantidad * precio).toLocaleString()}</th>
           </tr>
-          `
-          bodyGrilla.innerHTML += carrito
+          `;
+          bodyGrilla.innerHTML += carrito;
         }
       }
-    };
+    }
 
     vaciarCarrito.onclick = (e) => {
       Swal.fire({
-        title: "¿Estás seguro/a?",
-        icon: "warning",
+        title: '¿Estás seguro/a?',
+        icon: 'warning',
         showCancelButton: true,
-        confirmButtonColor: "#5BD99D",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "Sí, vaciar",
+        confirmButtonColor: '#5BD99D',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Sí, vaciar',
       }).then((result) => {
         if (result.isConfirmed) {
-          e.preventDefault()
-          cart = []
-          localStorage.clear()
+          e.preventDefault();
+          cart = [];
+          localStorage.clear();
           const empty = `
           <h5 class="cartText">El carrito está vacío</h5>
-          `
-          carritoDiv.innerHTML = empty
-          Swal.fire(
-            "Borrado",
-            "Tu carrito fue vaciado",
-            "success"
-          )
+          `;
+          carritoDiv.innerHTML = empty;
+          Swal.fire('Borrado', 'Tu carrito fue vaciado', 'success');
         }
-      })
+      });
     };
 
     function finalizarCompraFunc() {
       class Cliente {
-        constructor(nombre, email, telefono, direccion){
-          this.nombre = nombre,
-          this.email = email,
-          this.telefono = telefono,
-          this.direccion = direccion
+        constructor(nombre, email, telefono, direccion) {
+          (this.nombre = nombre),
+            (this.email = email),
+            (this.telefono = telefono),
+            (this.direccion = direccion);
         }
       }
-      let nombre = document.getElementById("nombre")
-      let email = document.getElementById("email")
-      let telefono = document.getElementById("telefono")
-      let direccion = document.getElementById("direccion")
-      let compraCliente = new Cliente(nombre.value, email.value, telefono.value, direccion.value)
-      Swal.fire("¡Gracias por tu compra, " + nombre.value + "! " + "Estos son tus datos: " + Object.values(compraCliente))
-    };
+      let nombre = document.getElementById('nombre');
+      let email = document.getElementById('email');
+      let telefono = document.getElementById('telefono');
+      let direccion = document.getElementById('direccion');
+      let compraCliente = new Cliente(nombre.value, email.value, telefono.value, direccion.value);
+      Swal.fire(
+        '¡Gracias por tu compra, ' +
+          nombre.value +
+          '! ' +
+          'Estos son tus datos: ' +
+          Object.values(compraCliente),
+      );
+    }
 
-    let finalizarCompra = document.getElementById("finalizarCompra");
+    let finalizarCompra = document.getElementById('finalizarCompra');
 
     finalizarCompra.onclick = (e) => {
-      e.preventDefault()
-      finalizarCompraFunc()
+      e.preventDefault();
+      finalizarCompraFunc();
     };
 
     stockProductos();
@@ -171,10 +173,9 @@ const localFetch = async () => {
     eventAdd();
 
     showCart();
-
-  } catch (error){
+  } catch (error) {
     console.error(error);
   }
-}
+};
 
-localFetch()
+localFetch();

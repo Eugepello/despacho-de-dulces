@@ -1,19 +1,18 @@
-*{
+* {
   padding: 0;
   margin: 0;
   -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
 }
 
-$mainColor: #A2E0B0;
-$secondaryColor: #B9C2F7;
+$mainColor: rgb(246, 246, 211);
 $black: #000;
-$shadow: 2px 0 4px rgba(0, 0, 0, .3);
-$textshadow: 0 0.4px 0.5px $black;
+$shadow: 2px 0 4px rgba(0, 0, 0, 0.3);
+$textshadow: 1px 0.4px 1px $black;
 
 /*NAV*/
 
-.navbar1{
+.navbar1 {
   background-color: $mainColor;
   box-shadow: $shadow;
   .logo {
@@ -26,16 +25,16 @@ $textshadow: 0 0.4px 0.5px $black;
   }
   .menu {
     justify-content: space-between;
-    .nav-item{
-      padding: 0 1vw;
+    .nav-item {
+      padding: 0 1rem;
     }
-    .navbar-nav{
+    .navbar-nav {
       font-size: large;
       font-weight: 300;
       margin-left: 13vw;
     }
-    li{
-      .nav-link{
+    li {
+      .nav-link {
         color: #000;
       }
       border-radius: 3px;
@@ -45,7 +44,7 @@ $textshadow: 0 0.4px 0.5px $black;
       cursor: pointer;
       transition: all 0.5s;
       transition-property: width background-color;
-      a{
+      a {
         display: block;
         text-decoration: none;
         color: $black;
@@ -55,308 +54,328 @@ $textshadow: 0 0.4px 0.5px $black;
         padding: 12px 15px;
       }
     }
-    li:hover{
+    li:hover {
       transform: scale(1.1, 1.1);
-      background-color: #fff;
-      color: $black;
+      background-color: rgb(215, 215, 185);
+      color: #fff;
     }
   }
 }
 
-.logo-redes{
-    color: $black;
+.logo-redes {
+  color: $black;
 }
 
 .active {
-    background-color: #fff;
+  background-color: rgb(215, 215, 185);
 }
 
 .redes {
-    font-size: 25px;
-    padding-left: 5vw;
-    i {
-        border-radius: 3px;
-        cursor: pointer;
-        transition: all 0.3s;
-        transition-property: width background-color;
-        margin: 15px;
-    }
-    i:hover{
-        transform: scale(1.5, 1.5);
-        background-color: #fff;
-    }
+  font-size: 25px;
+  padding-left: 5vw;
+  i {
+    border-radius: 3px;
+    cursor: pointer;
+    transition: all 0.3s;
+    transition-property: width background-color;
+    margin: 15px;
+  }
+  i:hover {
+    transform: scale(1.2, 1.2);
+    padding: 7px;
+    border-radius: 100%;
+    background-color: rgb(215, 215, 185);
+  }
 }
-
-
 
 /* CONTAINERS y CARDS */
 
-
-#stockContainer {
-    display: grid;
-    justify-content: space-between;
-    grid-template-areas:   'card card card card';
-    margin-top: 3rem;
-    gap: 2%;
+#stockDiv {
+  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('../../assets/img/background-despacho.jpg') no-repeat center center fixed;
+  background-size: cover;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.125);
 }
 
-#fondoCarrito{
+#stockContainer {
+  text-align: center;
+  display: grid;
+  justify-content: space-between;
+  grid-template-areas: 'card card card card';
+  gap: 2em;
+  margin-bottom: 100px;
+}
+
+.card {
+  background-color: rgba(255, 255, 255, 0.3);
+  filter: drop-shadow(0 30px 10px rgba(0, 0, 0, 0.125));
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  border: none;
+  width: 100%;
+  height: 100%;
+  border-radius: 10%;
+  color: #fff;
+  text-shadow: $textshadow;
+}
+
+.img-fluid {
+  background-position: center;
+  border-top-left-radius: 10%;
+  border-top-right-radius: 10%;
+}
+
+#fondoCarrito {
   padding: 4rem;
-  margin-top: 100px;
   background-color: pink;
   display: grid;
   justify-content: center;
-  i{
+  i {
     font-size: 40px;
     padding: 0 0 50px 1.6em;
   }
 }
 
-.cartText{
+.cartText {
   text-align: center;
 }
 
-.vaciarCarritoContainer{
+.vaciarCarritoContainer {
   display: flex;
   justify-content: center;
   padding-top: 30px;
 }
 
-.card{
-  background-color: $mainColor;
-  width: 16rem;
+.welcome {
+  font-weight: 700;
+  text-shadow: $textshadow;
+  margin: 3rem;
+  color: #fff;
+  text-align: center;
 }
 
-.welcome{
-    font-weight: 600;
-    margin: 3rem;
-    text-align: center;
-}
-
-.grillaContainer{
+.grillaContainer {
   display: flex;
   justify-content: center;
 }
 
-table{
+table {
   border-radius: 5px;
   color: black;
 }
 
-table tr th:first-child{
+table tr th:first-child {
   width: 80px;
 }
 
-table tr th:nth-child(2){
+table tr th:nth-child(2) {
   width: 300px;
 }
 
-thead tr th{
-  background: $mainColor;
-  color: $black; 
-}
-
-thead tr th:first-child{
-  border-radius: 10px 0px 0px 0px;
-}
-
-thead tr th:last-child{
-  border-radius: 0px 10px 0px 0px;
-}
-
-
-tbody tr:nth-child(even){
-  background: $mainColor;
-}
-
-tbody tr:nth-child(odd){
-  background: $mainColor;
-}
-
-tfoot tr th{
+thead tr th {
   background: $mainColor;
   color: $black;
 }
 
-tfoot tr th:first-child{
+thead tr th:first-child {
+  border-radius: 10px 0px 0px 0px;
+}
+
+thead tr th:last-child {
+  border-radius: 0px 10px 0px 0px;
+}
+
+tbody tr:nth-child(even) {
+  background: $mainColor;
+}
+
+tbody tr:nth-child(odd) {
+  background: $mainColor;
+}
+
+tfoot tr th {
+  background: $mainColor;
+  color: $black;
+}
+
+tfoot tr th:first-child {
   border-radius: 0px 0px 0px 10px;
 }
 
-
-tfoot tr th:last-child{
+tfoot tr th:last-child {
   border-radius: 0px 0px 10px 0px;
 }
 
-th{
+th {
   background: transparent;
 }
 
-.textGrilla { 
+.textGrilla {
   padding: 10px;
   font-size: 20px;
 }
 
-#form{
+#form {
   padding-top: 2%;
-  h3{
+  h3 {
     margin-bottom: 30px;
   }
-  .formulario{
+  .formulario {
     display: grid;
     gap: 10px;
   }
 }
 
-.btn-container{
+.btn-container {
   display: flex;
   justify-content: center;
   padding-top: 30px;
 }
 
-
 /*Footer*/
 
-.site-footer{
-    margin-top: 10%;
-    background-color:$mainColor;
-    box-shadow: $shadow;
-    padding:45px 0 20px;
-    font-size:15px;
-    line-height:24px;
+.site-footer {
+  margin-top: 10%;
+  background-color: $mainColor;
+  box-shadow: $shadow;
+  padding: 45px 0 20px;
+  font-size: 15px;
+  line-height: 24px;
+  color: $black;
+  hr {
+    opacity: 0.7;
+  }
+}
+
+.site-footer {
+  h6 {
     color: $black;
-    hr{
-        opacity: 0.7;
-    }
+    font-size: 16px;
+    text-transform: uppercase;
+    margin-top: 5px;
+    letter-spacing: 2px;
+  }
+  a {
+    color: $black;
+  }
 }
 
-.site-footer{
-    h6{
-        color:$black;
-        font-size:16px;
-        text-transform:uppercase;
-        margin-top:5px;
-        letter-spacing:2px
-    }
-    a{
-        color: $black;
-    }
+.site-footer a:hover {
+  color: $mainColor;
+  text-decoration: none;
 }
 
-.site-footer a:hover{
-    color:$mainColor;
-    text-decoration:none;
+.footer-links {
+  padding-left: 0;
+  list-style: none;
 }
 
-.footer-links{
-    padding-left:0;
-    list-style:none
+.footer-links li {
+  display: block;
 }
 
-.footer-links li{
-    display:block
+.footer-links a:active,
+.footer-links a:focus,
+.footer-links a:hover {
+  color: $black;
+  text-decoration: none;
 }
 
-.footer-links a:active,.footer-links a:focus,.footer-links a:hover{
-    color:$black;
-    text-decoration:none;
+.site-footer {
+  .social-icons {
+    text-align: right;
+  }
 }
 
-.site-footer{
-    .social-icons{
-        text-align:right
-    }
+.site-footer .social-icons a {
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  margin-left: 6px;
+  margin-right: 0;
+  border-radius: 100%;
 }
 
-.site-footer .social-icons a{
-    width:40px;
-    height:40px;
-    line-height:40px;
-    margin-left:6px;
-    margin-right:0;
-    border-radius:100%;
-}
-
-
-
-@media screen and (min-width: 767px) and (max-width:1199px){
-  .site-footer [class^=col-]{
-      margin-bottom:30px
+@media screen and (min-width: 767px) and (max-width: 1199px) {
+  .site-footer [class^='col-'] {
+    margin-bottom: 30px;
   }
 
-  #stockContainer{
+  #stockContainer {
     display: grid;
     justify-content: space-between;
-    grid-template-areas:   'card card card';
+    grid-template-areas: 'card card card';
   }
 }
 
-@media (max-width:950px){
-.site-footer{
-    padding-bottom:0
+@media (max-width: 950px) {
+  .site-footer {
+    padding-bottom: 0;
+  }
+
+  #stockContainer {
+    display: grid;
+    justify-content: space-between;
+    grid-template-areas: 'card card';
+  }
+
+  .site-footer .copyright-text,
+  .site-footer .social-icons {
+    text-align: center;
+  }
 }
 
-#stockContainer{
-  display: grid;
-  justify-content: space-between;
-  grid-template-areas:   'card card';
+.social-icons {
+  padding-left: 0;
+  margin-bottom: 0;
+  list-style: none;
 }
 
-.site-footer .copyright-text,.site-footer .social-icons{
-    text-align:center
-}
-}
-
-.social-icons{
-    padding-left:0;
-    margin-bottom:0;
-    list-style:none
+.social-icons li {
+  display: inline-block;
+  margin-bottom: 4px;
 }
 
-.social-icons li{
-    display:inline-block;
-    margin-bottom:4px
+.social-icons li.title {
+  margin-right: 15px;
+  text-transform: uppercase;
+  color: $black;
+  font-weight: 700;
+  font-size: 13px;
 }
 
-.social-icons li.title{
-    margin-right:15px;
-    text-transform:uppercase;
-    color:$black;
-    font-weight:700;
-    font-size:13px
+.social-icons a {
+  background-color: #fff;
+  color: $mainColor;
+  font-size: 16px;
+  display: inline-block;
+  line-height: 44px;
+  width: 44px;
+  height: 44px;
+  text-align: center;
+  margin-right: 8px;
+  border-radius: 100%;
+  -webkit-transition: all 0.2s linear;
+  -o-transition: all 0.2s linear;
+  transition: all 0.2s linear;
 }
 
-.social-icons a{
-    background-color:#fff;
-    color:$mainColor;
-    font-size:16px;
-    display:inline-block;
-    line-height:44px;
-    width:44px;
-    height:44px;
-    text-align:center;
-    margin-right:8px;
-    border-radius:100%;
-    -webkit-transition:all .2s linear;
-    -o-transition:all .2s linear;
-    transition:all .2s linear
+.social-icons a:active,
+.social-icons a:focus,
+.social-icons a:hover {
+  color: $black;
+  background-color: #fff;
 }
 
-.social-icons a:active,.social-icons a:focus,.social-icons a:hover{
-    color:$black;
-    background-color:#fff;
+.social-icons.size-sm a {
+  line-height: 34px;
+  height: 34px;
+  width: 34px;
+  font-size: 14px;
 }
 
-.social-icons.size-sm a{
-    line-height:34px;
-    height:34px;
-    width:34px;
-    font-size:14px
+.social-icons li.title {
+  display: block;
+  margin-right: 0;
+  font-weight: 600;
 }
-
-
-.social-icons li.title{
-  display:block;
-  margin-right:0;
-  font-weight:600
-}
-
