@@ -5,7 +5,8 @@
   box-sizing: border-box;
 }
 
-$mainColor: rgb(246, 246, 211);
+$mainColor: #F7C9C9;
+$secondaryColor: #bc9595;
 $black: #000;
 $shadow: 2px 0 4px rgba(0, 0, 0, 0.3);
 $textshadow: 1px 0.4px 1px $black;
@@ -56,7 +57,7 @@ $textshadow: 1px 0.4px 1px $black;
     }
     li:hover {
       transform: scale(1.1, 1.1);
-      background-color: rgb(215, 215, 185);
+      background-color: $secondaryColor;
       color: #fff;
     }
   }
@@ -67,7 +68,7 @@ $textshadow: 1px 0.4px 1px $black;
 }
 
 .active {
-  background-color: rgb(215, 215, 185);
+  background-color: $secondaryColor;
 }
 
 .redes {
@@ -84,7 +85,7 @@ $textshadow: 1px 0.4px 1px $black;
     transform: scale(1.2, 1.2);
     padding: 7px;
     border-radius: 100%;
-    background-color: rgb(215, 215, 185);
+    background-color: $secondaryColor;
   }
 }
 
@@ -127,7 +128,7 @@ $textshadow: 1px 0.4px 1px $black;
 
 #fondoCarrito {
   padding: 4rem;
-  background-color: pink;
+  background-color: $mainColor;
   display: grid;
   justify-content: center;
   i {
