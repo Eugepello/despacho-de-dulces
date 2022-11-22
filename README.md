@@ -15,7 +15,7 @@
 <p>Y algunas librerías como Sweet Alert, Toastify Js, etc.</p>
 <hr>
 <h3>About me</h3>
-<p>Mi nombre es Eugenio Pello, soy un Front-End Web Developer en formación y estoy ampliando mis conocimientos en JavaScript, para poder especializarme en React JS. Mi objetivo a futuro es adentrarme en el mundo del Backend y así convertirme en un Full Stack Web Developer. Te dejo mis redes sociales aquí debajo para que puedas seguirme y contactarme. ¡Gracias por tu tiempo!</p>
+<p>Mi nombre es Eugenio Pello, soy un Front end Web Developer especializado en React JS. En este caso, desarrollé un e-commerce con JavaScript Vanilla para traer alternativas a mi portfolio y poder profundizar las posibles soluciones ante un proyecto. Te dejo mis redes sociales aquí debajo para que puedas seguirme y contactarme. ¡Gracias por tu tiempo!</p>
 <a href="https://www.linkedin.com/in/eugenio-pello/" target="_blank"><img src="https://img.icons8.com/color/2x/linkedin.png" alt=""></a>
 <a href="https://www.instagram.com/eugepello/?hl=es-la" target="_blank"><img src="https://img.icons8.com/fluency/2x/instagram-new.png" alt=""></a>
 <a href="mailto:eugepello@gmail.com"><img src="https://img.icons8.com/color/2x/gmail-new.png" alt=""></a>
